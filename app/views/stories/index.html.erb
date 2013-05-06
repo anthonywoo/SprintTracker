@@ -1,0 +1,17 @@
+<div id="complete">
+</div>
+<div id="current">
+</div>
+<div id="backlog">
+</div>
+
+
+<script>
+  $(function(){
+    $complete = $("#complete")
+    $current = $("#current")
+    $backlog = $("#backlog")
+    var stories = <%= @stories.to_json.html_safe %>
+    TA.initialize($complete, $current, $backlog, stories);
+  });
+</script>

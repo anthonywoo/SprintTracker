@@ -1,0 +1,7 @@
+<ul>
+<% stories.each(function(story){ %>
+  <li>
+    <a href='#/story/<%= story.id %>'><%= story.escape('title') %></a>
+  </li>
+<% }) %>
+</ul>
