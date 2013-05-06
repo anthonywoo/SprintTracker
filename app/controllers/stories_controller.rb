@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   respond_to :html, only: [:index, :create]
 
   def index
-    @stories = Story.all
+    @stories = Story.order(:position).all
     respond_to do |format|
       format.html { render :index }
       format.json { render :json => @stories }
@@ -28,4 +28,6 @@ class StoriesController < ApplicationController
       render :json => story.errors, status: 422
     end
   end
+
+
 end

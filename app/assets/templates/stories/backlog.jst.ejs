@@ -1,5 +1,17 @@
+<div class="sortable">
 <% backlogStories.each(function(story){ %>
-  <div>
-    <a href='#/main' data-id='<%= story.id %>' class='story-title'><%= story.escape('title') %></a>
+  <div class="" data-id='<%= story.id %>'>
+    <a href='#/main' class='story-title'><%= story.escape('title') %></a>
   </div>
 <% }) %>
+</div>
+
+<script>
+$(".sortable").sortable({
+        update: function(event, ui){
+          console.log("ASDASD")
+          ui.item.trigger('drop', ui.item.index());
+          
+        }
+      })
+</script>

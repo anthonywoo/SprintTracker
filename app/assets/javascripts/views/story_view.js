@@ -14,6 +14,7 @@ TA.Views.StoryView = Backbone.View.extend({
   render: function(){
     var storyView = JST["stories/show"]({story: TA.Stores.CurrentStory.get("current")});
     this.$el.html(storyView); //
+    
     return this
   },
 

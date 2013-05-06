@@ -1,5 +1,4 @@
 <div>
-
   <a href="#/main" class='new-story'>New Story</a>
   <% if(story) {%>
     <form action="/stories" method="POST" id="story-update-form">
@@ -11,6 +10,8 @@
           <option value="2" <% if(story.escape("story_type_id")==="2"){ %> selected <%}%> >Bug</option>
           <option value="3" <% if(story.escape("story_type_id")==="3"){ %> selected <%}%> >Chore</option>
         </select>
+      Points:
+        <input type="number" name="points" class="story-input" value='<%= story.escape("points")%>'>
         <input type="submit" value="Submit" id="story-submit">
     </form>
     <input type="button" value="Cancel" id="cancel">

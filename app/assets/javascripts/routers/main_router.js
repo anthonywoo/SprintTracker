@@ -6,6 +6,7 @@ TA.Routers.MainRouter = Backbone.Router.extend({
 
   main: function(){
     this.clearAll();
+    console.log("MAIN")
     var completedView = new TA.Views.CompletedStoriesView({
       collection: TA.Stores.CompletedStories
     });
@@ -20,7 +21,15 @@ TA.Routers.MainRouter = Backbone.Router.extend({
       model: TA.Stores.CurrentStory.get("current")
     });
     $("#view-story").html(currentStoryView.render().$el);
-    
+    var that = this
+    // $(".draggable").draggable({ cursor: "crosshair", revert: "invalid"});
+    // $(".sortable").sortable({
+    //     update: function(event, ui){
+    //       console.log("ASDASD")
+    //       var sortParams = that.buildSortParams($(this).children())
+          
+    //     }
+    //   })
   },
 
   new: function(){
@@ -36,6 +45,14 @@ TA.Routers.MainRouter = Backbone.Router.extend({
 
   redirectToMain: function(){
     Backbone.history.navigate("#/main")
+  }, 
+
+  buildSortParams: function(childrens){
+    var params = []
+    $.each(childrens, function(i, l){
+      params.push($(l).attr("data-id"))
+    })
+    return params
   }
 
 
