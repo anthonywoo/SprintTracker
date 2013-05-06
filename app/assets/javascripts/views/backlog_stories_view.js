@@ -6,7 +6,7 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
   },
 
   events: {
-    "click .story-title": "setCurrentStoryView"
+    "dblclick .story-title": "setCurrentStoryView"
   },
 
   render: function(){
@@ -18,7 +18,6 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
   setCurrentStoryView: function(event){
     var selectedStory = this.collection.get($(event.target).attr("data-id"))
     TA.Stores.CurrentStory.set("current", selectedStory)
-
   }
 
 })

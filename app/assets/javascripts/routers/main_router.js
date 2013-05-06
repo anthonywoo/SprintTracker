@@ -1,7 +1,7 @@
 TA.Routers.MainRouter = Backbone.Router.extend({
   routes: {
     "": "redirectToMain",
-    "main": "main",
+    "main": "main"
   },
 
   main: function(){
@@ -17,16 +17,15 @@ TA.Routers.MainRouter = Backbone.Router.extend({
     $("#backlog").html(backlogView.render().$el);
 
     var currentStoryView = new TA.Views.StoryView({
-      model: TA.Stores.CurrentStory.get("current");
+      model: TA.Stores.CurrentStory.get("current")
     });
-    // $("#view-story").html(currentStoryView.render().$el);
+    $("#view-story").html(currentStoryView.render().$el);
     
   },
 
   new: function(){
     var newStoryView = new TA.Views.NewStoryView();
     $("#backlog").prepend(newStoryView.render().$el);
-
   },
 
   clearAll: function(){
