@@ -1,16 +1,19 @@
-<div id="complete">
+Completed:<div id="complete"> 
 </div>
-<div id="current">
+Current:<div id="current">
 </div>
-<div id="backlog">
+Backlog:<div id="backlog">
 </div>
-
+View:<div id="view-story">
+</div>
+<a href="#/new">New Story</a>
 
 <script>
   $(function(){
     $complete = $("#complete")
     $current = $("#current")
     $backlog = $("#backlog")
+    $view = $("#view-story")
     var stories = <%= @stories.to_json.html_safe %>
     TA.initialize($complete, $current, $backlog, stories);
   });

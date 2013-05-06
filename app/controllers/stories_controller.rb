@@ -11,4 +11,12 @@ class StoriesController < ApplicationController
     end
   end
 
+  def create
+    story = Story.new(params[:story])
+    if story.save
+      render :json => story
+    else
+      render :json => story.errors, status: 422
+    end
+  end
 end

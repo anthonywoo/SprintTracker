@@ -1,0 +1,20 @@
+<div>
+  <form action="/stories" method="POST" id="story-form">
+    <label> Title:
+      <input type="text" name="title" class="story-input">
+    </label>
+    <label> Description:
+      <input type="text" name="description" class="story-input">
+    </label>
+    <label> Type:
+      <select name="story_type_id" class="story-input">
+        <option value="1">Feature</option>
+        <option value="2">Bug</option>
+        <option value="3">Chore</option>
+      </select>
+    </label>
+    <input type="hidden" name="story_status_id" value="3" class="story-input">
+
+    <input type="submit" value="Submit" id="story-submit">
+  </form>
+</div>
