@@ -1,4 +1,4 @@
-<div class="sortable">
+<div id="backlog-items">
 <% backlogStories.each(function(story){ %>
   <div class="" data-id='<%= story.id %>'>
     <a href='#/main' class='story-title'><%= story.escape('title') %></a>
@@ -7,11 +7,12 @@
 </div>
 
 <script>
-$(".sortable").sortable({
-        update: function(event, ui){
-          console.log("ASDASD")
-          ui.item.trigger('drop', ui.item.index());
-          
-        }
-      })
+$("#backlog-items").sortable({
+  connectWith: ["#completed-items"],
+  update: function(event, ui){
+    console.log("ASDASD")
+    ui.item.trigger('dropbacklog', ui.item.index());
+    
+  }
+})
 </script>

@@ -7,7 +7,7 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
 
   events: {
     "dblclick .story-title": "setCurrentStoryView",
-    "drop": "drop"
+    "dropbacklog": "dropbacklog"
   },
 
   render: function(){
@@ -22,10 +22,11 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
     TA.Stores.CurrentStory.set("current", selectedStory)
   },
 
-  drop: function(event, new_index){
+  dropbacklog: function(event, new_index){
     var model_id = $(event.target).attr("data-id");
     
     var model = this.collection.get(model_id);
+    debugger
     this.collection.remove(model);
     this.collection.each(function (model, index) {
       var position = index;
