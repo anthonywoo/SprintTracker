@@ -20,40 +20,47 @@ TA.Views.CompletedStoriesView = Backbone.View.extend({
 
   dropcomplete: function(event, new_index){
     var model_id = $(event.target).attr("data-id");
-    
     var selModel = this.collection.get(model_id);
     if (selModel){
-      this.collection.remove(selModel);
-      this.collection.each(function (model, index) {
-        var position = index;
-        if (index >= new_index)
-            position += 1;
-        model.set('position', position);
-      });            
-      selModel.set('position', new_index);
-      this.collection.add(selModel, {at: new_index});
-      this.collection.each(function (model){
-        if (model.changedAttributes())
-          model.save();
-      })
+      this.sameCatDrop(selModel, new_index)
     } else {
-      selModel = TA.Stores.StartedStories.get(model_id) || TA.Stores.BacklogStories.get(model_id) ;
-      TA.Stores.BacklogStories.remove(selModel);
-      TA.Stores.StartedStories.remove(selModel) 
-      this.collection.each(function (model, index) {
-        var position = index;
-        if (index >= new_index)
-            position += 1;
-        model.set('position', position);
-      });            
-      selModel.set('position', new_index);
-      selModel.set("story_status_id", 1);
-      this.collection.add(selModel, {at: new_index});
-      this.collection.each(function (model){
-        if (model.changedAttributes())
-          model.save();
-      })
+      this.diffCatDrop(model_id, new_index)
     }
+  },
+
+  sameCatDrop: function(selModel, new_index){
+    this.collection.remove(selModel);
+    this.collection.each(function (model, index) {
+      var position = index;
+      if (index >= new_index)
+          position += 1;
+      model.set('position', position);
+    });            
+    selModel.set('position', new_index);
+    this.collection.add(selModel, {at: new_index});
+    this.collection.each(function (model){
+      if (model.changedAttributes())
+        model.save();
+    })
+  },
+
+  diffCatDrop: function(model_id, new_index){
+    selModel = TA.Stores.StartedStories.get(model_id) || TA.Stores.BacklogStories.get(model_id) ;
+    TA.Stores.BacklogStories.remove(selModel);
+    TA.Stores.StartedStories.remove(selModel) 
+    this.collection.each(function (model, index) {
+      var position = index;
+      if (index >= new_index)
+          position += 1;
+      model.set('position', position);
+    });            
+    selModel.set('position', new_index);
+    selModel.set("story_status_id", 1);
+    this.collection.add(selModel, {at: new_index});
+    this.collection.each(function (model){
+      if (model.changedAttributes())
+        model.save();
+    })
   }
 
 })
