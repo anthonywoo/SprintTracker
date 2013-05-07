@@ -17,19 +17,16 @@ TA.Routers.MainRouter = Backbone.Router.extend({
     });
     $("#backlog").html(backlogView.render().$el);
 
+    var currentView = new TA.Views.CurrentStoriesView({
+      collection: TA.Stores.StartedStories
+    })
+    $("#current").html(currentView.render().$el);
+
     var currentStoryView = new TA.Views.StoryView({
       model: TA.Stores.CurrentStory.get("current")
     });
     $("#view-story").html(currentStoryView.render().$el);
-    var that = this
-    // $(".draggable").draggable({ cursor: "crosshair", revert: "invalid"});
-    // $(".sortable").sortable({
-    //     update: function(event, ui){
-    //       console.log("ASDASD")
-    //       var sortParams = that.buildSortParams($(this).children())
-          
-    //     }
-    //   })
+
   },
 
   new: function(){

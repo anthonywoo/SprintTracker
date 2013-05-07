@@ -5,6 +5,7 @@ class Story < ActiveRecord::Base
 
   before_save :set_position
 
+  validates :title, :description, :presence => true
   protected
 
   def set_position

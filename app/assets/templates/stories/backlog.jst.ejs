@@ -1,18 +1,21 @@
 <div id="backlog-items">
+Backlog
+<br>
+Remaining: <%= totalPoints %>
 <% backlogStories.each(function(story){ %>
-  <div class="" data-id='<%= story.id %>'>
-    <a href='#/main' class='story-title'><%= story.escape('title') %></a>
+  <div data-id='<%= story.id %>'>
+    <a href='#/main' class='story-title' data-id='<%= story.id %>'><%= story.escape('title') %></a>
+    <a class='btn btn-primary' id='start-story' data-id='<%= story.id %>'>Start</a>
   </div>
 <% }) %>
 </div>
 
 <script>
 $("#backlog-items").sortable({
-  connectWith: ["#completed-items"],
+  connectWith: ["#completed-items", "#current-items"],
   update: function(event, ui){
-    console.log("ASDASD")
+    console.log("backlog")
     ui.item.trigger('dropbacklog', ui.item.index());
-    
   }
 })
 </script>

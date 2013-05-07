@@ -8,7 +8,8 @@ TA.Views.StoryView = Backbone.View.extend({
     "click .new-story": "renderNewStoryTemplate",
     "submit #story-form": "storySubmit",
     "submit #story-update-form": "storyUpdate",
-    "click #cancel": "cancelStory"
+    "click #cancel": "cancelStory",
+    "click #delete": "deleteStory"
   },
 
   render: function(){
@@ -51,6 +52,15 @@ TA.Views.StoryView = Backbone.View.extend({
   cancelStory: function(event){
     TA.Stores.CurrentStory.set("current", null)
     this.render();
+  },
+
+  deleteStory: function(){
+    var currentStory = TA.Stores.CurrentStory.get("current");
+    TA.Stores.CompletedStories.remove(currentStory);
+    TA.Stores.StartedStories.remove(currentStory);
+    TA.Stores.BacklogStories.remove(currentStory);
+    TA.Stores.CurrentStory.set("current", null);
+    currentStory.destroy();
   }
 
 })

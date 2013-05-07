@@ -1,13 +1,20 @@
 TA.Views.CompletedStoriesView = Backbone.View.extend({
 
+  initialize: function(){
+    TA.Stores.CompletedStories.on("remove", this.render.bind(this))
+    TA.Stores.CompletedStories.on("add", this.render.bind(this))
+    TA.Stores.CompletedStories.on("change", this.render.bind(this))
+  },
+
   events: {
     "dblclick .story-title": "setCurrentStoryView",
-    "dropcomplete": "dropcomplete"
+    "dropcomplete": "dropComplete"
   },
 
   render: function(){
     var rendered = JST["stories/completed"]({
-      stories: this.collection
+      stories: this.collection,
+      totalPoints: this.getTotalPoints()
     });
     this.$el.html(rendered);
     return this
@@ -18,7 +25,15 @@ TA.Views.CompletedStoriesView = Backbone.View.extend({
     TA.Stores.CurrentStory.set("current", selectedStory)
   },
 
-  dropcomplete: function(event, new_index){
+  getTotalPoints: function(){
+    var points = 0
+    TA.Stores.CompletedStories.each(function(model){
+      points += model.get("points");
+    })
+    return points
+  },
+
+  dropComplete: function(event, new_index){
     var model_id = $(event.target).attr("data-id");
     var selModel = this.collection.get(model_id);
     if (selModel){

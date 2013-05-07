@@ -13,6 +13,7 @@ class StoriesController < ApplicationController
 
   def create
     story = Story.new(params[:story])
+    binding.pry
     if story.save
       render :json => story
     else
@@ -24,6 +25,14 @@ class StoriesController < ApplicationController
     story = Story.find(params[:id])
     if story.update_attributes(params[:story])
       render :json => story
+    else
+      render :json => story.errors, status: 422
+    end
+  end
+
+  def destroy
+    story = Story.find(params[:id])
+    if story.destroy
     else
       render :json => story.errors, status: 422
     end

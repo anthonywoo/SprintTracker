@@ -12,9 +12,10 @@
         </select>
       Points:
         <input type="number" name="points" class="story-input" value='<%= story.escape("points")%>'>
-        <input type="submit" value="Submit" id="story-submit">
+        <input type="submit" value="Update" id="story-submit">
     </form>
     <input type="button" value="Cancel" id="cancel">
+    <input type="button" value="Delete" id="delete">
   <% } else { %>
     Double Click a Story to view its details
   <% } %>

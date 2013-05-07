@@ -1,48 +1,39 @@
-TA.Views.BacklogStoriesView = Backbone.View.extend({
+TA.Views.CurrentStoriesView = Backbone.View.extend({
+
   initialize: function(){
-    TA.Stores.BacklogStories.on("add", this.render.bind(this))
-    TA.Stores.BacklogStories.on("change", this.render.bind(this))
-    TA.Stores.BacklogStories.on("remove", this.render.bind(this))
+    TA.Stores.StartedStories.on("remove", this.render.bind(this))
+    TA.Stores.StartedStories.on("add", this.render.bind(this))
+    TA.Stores.StartedStories.on("change", this.render.bind(this))
   },
 
   events: {
     "dblclick .story-title": "setCurrentStoryView",
-    "dropbacklog": "dropBacklog",
-    "click #start-story": "startStory"
+    "dropcurrent": "dropCurrent"
   },
 
   render: function(){
-    var backlogView = JST["stories/backlog"]({
-      backlogStories: this.collection, 
+    var rendered = JST["stories/current"]({
+      stories: this.collection,
       totalPoints: this.getTotalPoints()
     });
-    this.$el.html(backlogView);
+    this.$el.html(rendered);
     return this
   },
 
-  startStory: function(event){
-    var selectedStory = this.collection.get($(event.target).attr("data-id"));
-    selectedStory.set("position", 10000)
-    selectedStory.set("story_status_id", 2)
-    TA.Stores.BacklogStories.remove(selectedStory)
-    TA.Stores.StartedStories.add(selectedStory)
-    selectedStory.save()
-  },
-
   setCurrentStoryView: function(event){
-    var selectedStory = this.collection.get($(event.target).attr("data-id"));
-    TA.Stores.CurrentStory.set("current", selectedStory);
+    var selectedStory = this.collection.get($(event.target).attr("data-id"))
+    TA.Stores.CurrentStory.set("current", selectedStory)
   },
 
   getTotalPoints: function(){
     var points = 0
-    TA.Stores.BacklogStories.each(function(model){
+    TA.Stores.StartedStories.each(function(model){
       points += model.get("points");
     })
     return points
   },
 
-  dropBacklog: function(event, new_index){
+  dropCurrent: function(event, new_index){
     var model_id = $(event.target).attr("data-id");
     var selModel = this.collection.get(model_id);
     if (selModel){
@@ -69,22 +60,22 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
   },
 
   diffCatDrop: function(model_id, new_index){
-    selModel = TA.Stores.StartedStories.get(model_id) || TA.Stores.CompletedStories.get(model_id) ;
-    TA.Stores.CompletedStories.remove(selModel);
-    TA.Stores.StartedStories.remove(selModel) 
+    selModel = TA.Stores.CompletedStories.get(model_id) || TA.Stores.BacklogStories.get(model_id) ;
+    TA.Stores.BacklogStories.remove(selModel);
+    TA.Stores.CompletedStories.remove(selModel); 
     this.collection.each(function (model, index) {
       var position = index;
       if (index >= new_index)
           position += 1;
       model.set('position', position);
-    });            
+    });          
     selModel.set('position', new_index);
-    selModel.set("story_status_id", 3);
+    selModel.set("story_status_id", 2);
     this.collection.add(selModel, {at: new_index});
     this.collection.each(function (model){
       if (model.changedAttributes())
         model.save();
     })
   }
-    
+
 })
