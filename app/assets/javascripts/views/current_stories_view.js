@@ -8,7 +8,8 @@ TA.Views.CurrentStoriesView = Backbone.View.extend({
 
   events: {
     "dblclick .story-title": "setCurrentStoryView",
-    "dropcurrent": "dropCurrent"
+    "dropcurrent": "dropCurrent",
+    "click #finish-story": "finishStory"
   },
 
   render: function(){
@@ -25,6 +26,15 @@ TA.Views.CurrentStoriesView = Backbone.View.extend({
     TA.Stores.CurrentStory.set("current", selectedStory)
   },
 
+  finishStory: function(event){
+    var selectedStory = this.collection.get($(event.target).attr("data-id"));
+    selectedStory.set("position", TA.Stores.CompletedStories.length * 2)
+    selectedStory.set("story_status_id", 3)
+    TA.Stores.StartedStories.remove(selectedStory)
+    TA.Stores.CompletedStories.add(selectedStory)
+    selectedStory.save()
+  },
+
   getTotalPoints: function(){
     var points = 0
     TA.Stores.StartedStories.each(function(model){
@@ -37,9 +47,9 @@ TA.Views.CurrentStoriesView = Backbone.View.extend({
     var model_id = $(event.target).attr("data-id");
     var selModel = this.collection.get(model_id);
     if (selModel){
-      this.sameCatDrop(selModel, new_index)
+      this.sameCatDrop(selModel, new_index - 1)
     } else {
-      this.diffCatDrop(model_id, new_index)
+      this.diffCatDrop(model_id, new_index - 1)
     }
   },
 

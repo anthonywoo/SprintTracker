@@ -1,10 +1,17 @@
+<div class="panel-title">
+  Current:
+  <br>
+  In Progress: <%= totalPoints %> pts
+</div>
 <div id="current-items">
-Current:
-<br>
-Velocity: <%= totalPoints %>
 <% stories.each(function(story){ %>
-  <div data-id='<%= story.id %>'>
-    <a href='#/main' data-id='<%= story.id %>' class='story-title'><%= story.escape('title') %></a>
+  <div data-id='<%= story.id %>' class="single-story">
+    <div class='story-link'>
+      <a href='#/main' data-id='<%= story.id %>' class='story-title'><%= story.escape('title') %></a>
+    </div>
+    <div class='story-action'>
+      <a class='btn btn-success btn-mini' id='finish-story' data-id='<%= story.id %>'>Done</a>
+    </div>
   </div>
 <% }) %>
 </div>

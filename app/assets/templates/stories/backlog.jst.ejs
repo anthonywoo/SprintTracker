@@ -1,13 +1,19 @@
+<div class="panel-title">
+  Backlog
+  <br>
+  Remaining: <%= totalPoints %> pts
+</div>
 <div id="backlog-items">
-Backlog
-<br>
-Remaining: <%= totalPoints %>
-<% backlogStories.each(function(story){ %>
-  <div data-id='<%= story.id %>'>
-    <a href='#/main' class='story-title' data-id='<%= story.id %>'><%= story.escape('title') %></a>
-    <a class='btn btn-primary' id='start-story' data-id='<%= story.id %>'>Start</a>
-  </div>
-<% }) %>
+  <% backlogStories.each(function(story){ %>
+    <div data-id='<%= story.id %>' class="single-story">
+      <div class='story-link'>
+        <a href='#/main' class='story-title' data-id='<%= story.id %>'><%= story.escape('title') %></a>
+      </div>
+      <div class='story-action'>
+        <a class='btn btn-warning btn-mini' id='start-story' data-id='<%= story.id %>'>Start</a>
+      </div>
+    </div>
+  <% }) %>
 </div>
 
 <script>

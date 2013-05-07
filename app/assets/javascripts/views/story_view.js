@@ -29,16 +29,27 @@ TA.Views.StoryView = Backbone.View.extend({
     event.preventDefault();
     this.makeParams();
     var newStory = new TA.Models.Story(this.makeParams());
-    newStory.save();
-    TA.Stores.BacklogStories.add(newStory);
+    if (newStory.isValid()){
+      newStory.save();
+      TA.Stores.BacklogStories.add(newStory);
+      this.render();
+    } else {
+      $("#new-error-messages").html(newStory.validationError);
+    }
   },
 
   storyUpdate: function(event){
     event.preventDefault();
     var currentStory = TA.Stores.CurrentStory.get("current")
-    currentStory.set(this.makeParams());
-    currentStory.save();
-    TA.Stores.CurrentStory.set("current", null)
+    var clonedStory = currentStory.clone()
+    clonedStory.set(this.makeParams());
+    if (clonedStory.isValid()){
+      currentStory.set(this.makeParams());
+      currentStory.save();
+      TA.Stores.CurrentStory.set("current", null)
+    } else {
+      $("#update-error-messages").html(clonedStory.validationError)
+    }
   },
 
   makeParams: function(){

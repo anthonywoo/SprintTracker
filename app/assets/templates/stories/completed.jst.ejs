@@ -1,12 +1,14 @@
+<div class="panel-title">
+  Completed:
+  <br>
+  Total: <%= totalPoints %> pts
+</div>
 <div id="completed-items">
-Completed:
-<br>
-Total: <%= totalPoints %>
-<% stories.each(function(story){ %>
-  <div data-id='<%= story.id %>'>
-    <a href='#/main' data-id='<%= story.id %>' class='story-title'><%= story.escape('title') %></a>
-  </div>
-<% }) %>
+  <% stories.each(function(story){ %>
+    <div data-id='<%= story.id %>' class="single-story">
+      <a href='#/main' data-id='<%= story.id %>' class='story-title'><%= story.escape('title') %></a>
+    </div>
+  <% }) %>
 </div>
 
 <script>

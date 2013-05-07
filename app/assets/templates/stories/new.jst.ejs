@@ -1,12 +1,14 @@
 <div>
+  <div id="new-error-messages">
+  </div>
   <form action="/stories" method="POST" id="story-form">
-    <label> Title:
+    <label> Title:<br>
       <input type="text" name="title" class="story-input">
     </label>
-    <label> Description:
+    <label> Description:<br>
       <input type="text" name="description" class="story-input">
     </label>
-    <label> Type:
+    <label> Type: <br>
       <select name="story_type_id" class="story-input">
         <option value="1">Feature</option>
         <option value="2">Bug</option>
@@ -16,7 +18,7 @@
     <label> Points:
       <input type="number" name="points" class="story-input">
     </label>
-    <input type="hidden" name="story_status_id" value="3" class="story-input">
+    <input type="hidden" name="story_status_id" value="1" class="story-input">
 
     <input type="submit" value="Create" id="story-submit">
   </form>

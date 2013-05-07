@@ -7,11 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="navbar navbar-fixed-top" id="top_navbar">
+    <div class="navbar-inner">
+      <ul>
+        <%= link_to "PTL", root_url, :class=> "brand" %>
+      </ul>
+    </div>
+  </div>
 
-
-<div class="container">
-  <%= yield %>
-</div>
+  <div class="container">
+    <%= yield %>
+  </div>
 
 </body>
 </html>

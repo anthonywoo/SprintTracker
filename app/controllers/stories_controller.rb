@@ -13,7 +13,6 @@ class StoriesController < ApplicationController
 
   def create
     story = Story.new(params[:story])
-    binding.pry
     if story.save
       render :json => story
     else
