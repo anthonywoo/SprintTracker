@@ -26,7 +26,8 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
     var model_id = $(event.target).attr("data-id");
     
     var model = this.collection.get(model_id);
-    debugger
+
+    
     this.collection.remove(model);
     this.collection.each(function (model, index) {
       var position = index;
