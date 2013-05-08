@@ -74,6 +74,10 @@ TA.Views.StoryView = Backbone.View.extend({
     if (searchString !== "") {
       var regexString = new RegExp(searchString, "i")
       var results = TA.Stores.AllStories.filter(function(story){return story.get("title").match(regexString)})
+      if (results.length === 0) { 
+        $("#search-results").html("") 
+        return
+       }
       var resultsView = JST["stories/search_results"]({results: results})
       $("#search-results").html(resultsView)
     } else {

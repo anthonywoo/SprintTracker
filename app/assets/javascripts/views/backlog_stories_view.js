@@ -79,8 +79,8 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
       model.set('position', position);
     });            
     selModel.set('position', new_index);
-    selModel.set("story_status_id", 1);
     selModel.set("completion_date", null);
+    selModel.set("story_status_id", 1);
     this.collection.add(selModel, {at: new_index});
     this.collection.each(function (model){
       if (model.changedAttributes())

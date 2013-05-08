@@ -13,7 +13,6 @@ TA.Views.NewStoryView = Backbone.View.extend({
 
   addTag: function(event){
     event.preventDefault
-    debugger
     console.log(event)
   }
 
