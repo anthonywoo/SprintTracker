@@ -9,13 +9,20 @@ TA.Views.StoryView = Backbone.View.extend({
     "submit #story-form": "storySubmit",
     "submit #story-update-form": "storyUpdate",
     "click #cancel": "cancelStory",
-    "click #delete": "deleteStory"
+    "click #delete": "deleteStory",
+    "keypress #tag-input": "addTag",
+    "keyup #story-search": "searchStories",
+    "click .search-result": "viewSearchResult"
   },
 
   render: function(){
-    var storyView = JST["stories/show"]({story: TA.Stores.CurrentStory.get("current")});
-    this.$el.html(storyView); //
+    if (TA.Stores.CurrentStory.get("current")){
+      var storyView = JST["stories/show"]({story: TA.Stores.CurrentStory.get("current")})
+    } else {
+      var storyView = JST["stories/no_story"]({})
+    }
     
+    this.$el.html(storyView); //
     return this
   },
 
@@ -50,6 +57,35 @@ TA.Views.StoryView = Backbone.View.extend({
     } else {
       $("#update-error-messages").html(clonedStory.validationError)
     }
+  },
+
+  addTag: function(event){
+    if (event.keyCode === 13){
+      event.preventDefault();
+      var hiddenValue = '<input type="hidden" name="tag_names[]" value="' + $("#tag-input").val() + '">'
+      var tagSpan = '<span class="label label-info tag-label temp-tag">'+ $("#tag-input").val() + hiddenValue + '</span>'
+      $("#tag-area").append(tagSpan)
+      $("#tag-input").val("")
+    }
+  },
+
+  searchStories: function(event){
+    var searchString = $("#story-search").val();
+    if (searchString !== "") {
+      var regexString = new RegExp(searchString, "i")
+      var results = TA.Stores.AllStories.filter(function(story){return story.get("title").match(regexString)})
+      var resultsView = JST["stories/search_results"]({results: results})
+      $("#search-results").html(resultsView)
+    } else {
+      $("#search-results").html("")
+    }
+  },
+
+  viewSearchResult: function(event){
+    var dataId = $(event.target).attr('data-id');
+    var selStory = TA.Stores.CompletedStories.get(dataId) || TA.Stores.StartedStories.get(dataId) || 
+                   TA.Stores.BacklogStories.get(dataId);
+    TA.Stores.CurrentStory.set("current", selStory);
   },
 
   makeParams: function(){
