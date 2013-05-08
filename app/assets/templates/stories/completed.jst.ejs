@@ -1,22 +1,8 @@
-<div class="panel-title">
-  Completed:
-  <br>
-  Total: <%= totalPoints %> pts
-</div>
-<div id="completed-items">
-  <% stories.each(function(story){ %>
-    <div data-id='<%= story.id %>' class="single-story">
-      <a href='#/main' data-id='<%= story.id %>' class='story-title'><%= story.escape('title') %></a>
-    </div>
-  <% }) %>
-</div>
 
-<script>
-$("#completed-items").sortable({
-  connectWith: ["#current-items", "#backlog-items"],
-  update: function(event, ui){
-    console.log("COMPLETED")
-    ui.item.trigger('dropcomplete', ui.item.index());
-  }
-})
-</script>
+<% stories.each(function(story){ %>
+  <div data-id='<%= story.id %>' class="single-story">
+    <a href='#/main' data-id='<%= story.id %>' class='story-title'><%= story.escape('title') %></a>
+  </div>
+<% }) %>
+
+

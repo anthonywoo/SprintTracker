@@ -4,7 +4,16 @@ TA.Views.CompletedStoriesView = Backbone.View.extend({
     TA.Stores.CompletedStories.on("remove", this.render.bind(this))
     TA.Stores.CompletedStories.on("add", this.render.bind(this))
     TA.Stores.CompletedStories.on("change", this.render.bind(this))
+    this.$el.sortable({
+                        connectWith: ["#current-items", "#backlog-items"],
+                        update: function(event, ui){
+                          console.log("COMPLETED")
+                          ui.item.trigger('dropcomplete', ui.item.index());
+                        }
+                      })
   },
+
+  id: "completed-items",
 
   events: {
     "dblclick .story-title": "setCurrentStoryView",

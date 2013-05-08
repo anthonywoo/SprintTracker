@@ -27,7 +27,6 @@ TA.Routers.MainRouter = Backbone.Router.extend({
       model: TA.Stores.CurrentStory.get("current")
     });
     $("#view-story").html(currentStoryView.render().$el);
-
   },
 
   new: function(){
@@ -36,17 +35,13 @@ TA.Routers.MainRouter = Backbone.Router.extend({
   },
 
   showAll: function(){
-    $("#complete").show();
-    $("#backlog").show();
-    $("#current").show();
-    $("#view-story").show();
+    $(".story-panel").show();
+    $(".panel-title").show();
   },
 
   hideAll: function(){
-    $("#complete").hide();
-    $("#backlog").hide();
-    $("#current").hide();
-    $("#view-story").hide();
+    $(".story-panel").hide();
+    $(".panel-title").hide();
   },
 
   chart: function(){
@@ -58,7 +53,7 @@ TA.Routers.MainRouter = Backbone.Router.extend({
   },
 
   redirectToMain: function(){
-    Backbone.history.navigate("#/main")
+    Backbone.history.navigate("#/main");
   }
 
 })

@@ -10,7 +10,7 @@ TA.Views.StoryView = Backbone.View.extend({
     "submit #story-update-form": "storyUpdate",
     "click #cancel": "cancelStory",
     "click #delete": "deleteStory",
-    "keypress #tag-input": "addTag",
+    // "keypress #tag-input": "addTag",
     "keyup #story-search": "searchStories",
     "click .search-result": "viewSearchResult"
   },

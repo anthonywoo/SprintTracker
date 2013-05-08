@@ -8,8 +8,8 @@ TA.Collections.Stories = Backbone.Collection.extend({
   sumRemainingPoints: function(date){
 
     var stories = this.filter(function(story) {  
-                            return (story.get("completion_date") === null) || (new Date(story.get("completion_date")) > date);
-                          });
+                              return (story.get("completion_date") === null) || (new Date(story.get("completion_date")) > date);
+                            });
     var pts = 0
     _.each(stories,function(story){pts += story.get("points")})
     return pts

@@ -7,18 +7,25 @@
   min-height: 600px;
   width: 260px;
   float:left;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  border: 2px solid #45aeea;
-  margin-right: 3px;
-  margin-left: 3px;
+  border-left: 2px solid #45aeea;
+  border-right: 2px solid #45aeea;
+  border-bottom: 2px solid #45aeea;
+  margin-left: 6px;
   padding-right: 3px;
   padding-left: 3px;
   background-color: #E8E8E8;
 }
 
 .panel-title {
-  margin-left: 2px;
+  width: 260px;
+  float:left;
+  border-left: 2px solid #45aeea;
+  border-right: 2px solid #45aeea;
+  border-top: 2px solid #45aeea;
+  margin-left: 6px;
+  padding-right: 3px;
+  padding-left: 3px;
+  background-color: #E8E8E8;
   font-weight: bold;
 }
 

@@ -1,10 +1,19 @@
 TA.Views.BacklogStoriesView = Backbone.View.extend({
   initialize: function(){
-    TA.Stores.BacklogStories.on("add", this.render.bind(this))
-    TA.Stores.BacklogStories.on("change", this.render.bind(this))
-    TA.Stores.BacklogStories.on("remove", this.render.bind(this))
+    TA.Stores.BacklogStories.on("add", this.render.bind(this));
+    TA.Stores.BacklogStories.on("change", this.render.bind(this));
+    TA.Stores.BacklogStories.on("remove", this.render.bind(this));
+    this.$el.sortable({
+                        connectWith: ["#completed-items", "#current-items"],
+                        update: function(event, ui){
+                          console.log("backlog")
+                          ui.item.trigger('dropbacklog', ui.item.index());
+                        }
+                      });
   },
 
+  id: "backlog-items",
+  
   events: {
     "dblclick .story-title": "setCurrentStoryView",
     "dropbacklog": "dropBacklog",

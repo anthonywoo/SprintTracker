@@ -1,9 +1,3 @@
-<div class="panel-title">
-  Current:
-  <br>
-  In Progress: <%= totalPoints %> pts
-</div>
-<div id="current-items">
 <% stories.each(function(story){ %>
   <div data-id='<%= story.id %>' class="single-story">
     <div class='story-link'>
@@ -14,14 +8,5 @@
     </div>
   </div>
 <% }) %>
-</div>
 
-<script>
-$("#current-items").sortable({
-  connectWith: ["#completed-items", "#backlog-items"],
-  update: function(event, ui){
-    console.log("QQQQQQ")
-    ui.item.trigger('dropcurrent', ui.item.index());
-  }
-})
-</script>
+

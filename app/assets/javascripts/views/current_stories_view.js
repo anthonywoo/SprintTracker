@@ -1,10 +1,19 @@
 TA.Views.CurrentStoriesView = Backbone.View.extend({
 
   initialize: function(){
-    TA.Stores.StartedStories.on("remove", this.render.bind(this))
-    TA.Stores.StartedStories.on("add", this.render.bind(this))
-    TA.Stores.StartedStories.on("change", this.render.bind(this))
+    TA.Stores.StartedStories.on("remove", this.render.bind(this));
+    TA.Stores.StartedStories.on("add", this.render.bind(this));
+    TA.Stores.StartedStories.on("change", this.render.bind(this));
+    this.$el.sortable({
+                        connectWith: ["#completed-items", "#backlog-items"],
+                        update: function(event, ui){
+                          console.log("QQQQQQ")
+                          ui.item.trigger('dropcurrent', ui.item.index());
+                        }
+                      });
   },
+
+  id: "current-items",
 
   events: {
     "dblclick .story-title": "setCurrentStoryView",
@@ -17,7 +26,9 @@ TA.Views.CurrentStoriesView = Backbone.View.extend({
       stories: this.collection,
       totalPoints: this.getTotalPoints()
     });
+
     this.$el.html(rendered);
+
     return this
   },
 
