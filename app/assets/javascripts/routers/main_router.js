@@ -59,15 +59,6 @@ TA.Routers.MainRouter = Backbone.Router.extend({
 
   redirectToMain: function(){
     Backbone.history.navigate("#/main")
-  }, 
-
-  buildSortParams: function(childrens){
-    var params = []
-    $.each(childrens, function(i, l){
-      params.push($(l).attr("data-id"))
-    })
-    return params
   }
-
 
 })
