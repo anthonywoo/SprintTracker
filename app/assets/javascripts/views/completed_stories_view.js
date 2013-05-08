@@ -37,9 +37,9 @@ TA.Views.CompletedStoriesView = Backbone.View.extend({
     var model_id = $(event.target).attr("data-id");
     var selModel = this.collection.get(model_id);
     if (selModel){
-      this.sameCatDrop(selModel, new_index - 1)
+      this.sameCatDrop(selModel, new_index)
     } else {
-      this.diffCatDrop(model_id, new_index - 1)
+      this.diffCatDrop(model_id, new_index)
     }
   },
 
@@ -47,7 +47,6 @@ TA.Views.CompletedStoriesView = Backbone.View.extend({
     this.collection.remove(selModel);
     this.collection.each(function (model, index) {
       var position = index;
-      // debugger
       if (index >= new_index)
           position += 1;
       model.set('position', position);
@@ -72,6 +71,7 @@ TA.Views.CompletedStoriesView = Backbone.View.extend({
     });            
     selModel.set('position', new_index);
     selModel.set("story_status_id", 3);
+    selModel.set("completion_date", new Date())
     this.collection.add(selModel, {at: new_index});
     this.collection.each(function (model){
       if (model.changedAttributes())

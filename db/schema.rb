@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130506215943) do
+ActiveRecord::Schema.define(:version => 20130507222756) do
 
   create_table "stories", :force => true do |t|
     t.string   "title"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20130506215943) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "position"
+    t.date     "completion_date"
   end
 
   add_index "stories", ["story_status_id"], :name => "index_stories_on_story_status_id"

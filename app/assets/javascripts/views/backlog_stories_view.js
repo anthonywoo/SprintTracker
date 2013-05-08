@@ -23,7 +23,7 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
   startStory: function(event){
     var selectedStory = this.collection.get($(event.target).attr("data-id"));
     selectedStory.set("position", TA.Stores.StartedStories.length * 2)
-    selectedStory.set("story_status_id", TA.Stores.StartedStories.length * 2)
+    selectedStory.set("story_status_id", 2)
     TA.Stores.BacklogStories.remove(selectedStory)
     TA.Stores.StartedStories.add(selectedStory)
     selectedStory.save()
@@ -46,9 +46,9 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
     var model_id = $(event.target).attr("data-id");
     var selModel = this.collection.get(model_id);
     if (selModel){
-      this.sameCatDrop(selModel, new_index - 1)
+      this.sameCatDrop(selModel, new_index)
     } else {
-      this.diffCatDrop(model_id, new_index - 1)
+      this.diffCatDrop(model_id, new_index)
     }
   },
 
@@ -80,6 +80,7 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
     });            
     selModel.set('position', new_index);
     selModel.set("story_status_id", 1);
+    selModel.set("completion_date", null);
     this.collection.add(selModel, {at: new_index});
     this.collection.each(function (model){
       if (model.changedAttributes())

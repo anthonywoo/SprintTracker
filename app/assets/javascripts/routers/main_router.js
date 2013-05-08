@@ -1,12 +1,13 @@
 TA.Routers.MainRouter = Backbone.Router.extend({
   routes: {
     "": "redirectToMain",
-    "main": "main"
+    "main": "main",
+    "chart": "chart"
   },
 
   main: function(){
-    this.clearAll();
-    console.log("MAIN")
+    this.showAll();
+    $("#chart-view").html("")
     var completedView = new TA.Views.CompletedStoriesView({
       collection: TA.Stores.CompletedStories
     });
@@ -34,10 +35,26 @@ TA.Routers.MainRouter = Backbone.Router.extend({
     $("#backlog").prepend(newStoryView.render().$el);
   },
 
-  clearAll: function(){
-    $("#complete").html("");
-    $("#backlog").html("");
-    $("started").html("");
+  showAll: function(){
+    $("#complete").show();
+    $("#backlog").show();
+    $("#current").show();
+    $("#view-story").show();
+  },
+
+  hideAll: function(){
+    $("#complete").hide();
+    $("#backlog").hide();
+    $("#current").hide();
+    $("#view-story").hide();
+  },
+
+  chart: function(){
+    this.hideAll();
+    var chartView = new TA.Views.ChartView();
+    chartView.getChartData();
+    chartView.render();
+    $("#chart-view").html(chartView.render().$el);
   },
 
   redirectToMain: function(){

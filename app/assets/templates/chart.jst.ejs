@@ -1,0 +1,52 @@
+<div id="chart" data-points='<%= points %>' data-dates='<%= dates %>'>
+</div>
+<script>
+$(function () {
+    
+    var points = JSON.parse("[" + $('#chart').attr("data-points") + "]");
+    var dates = $('#chart').attr("data-dates").split(",")
+
+    $('#chart').highcharts({
+        chart: {
+            type: 'line',
+            marginRight: 130,
+            marginBottom: 25
+        },
+        title: {
+            text: 'Current Sprint Burndown',
+            x: -20 //center
+        },
+
+        xAxis: {
+            categories: dates
+        },
+        yAxis: {
+            title: {
+                text: 'Points Remaining'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }],
+            min: 0
+        },
+        tooltip: {
+            valueSuffix: 'pts'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -10,
+            y: 100,
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Points Remaining',
+            data: points
+        }]
+    });
+});
+
+</script>
