@@ -15,7 +15,7 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
     this.$el.sortable({
                         connectWith: ["#completed-items", "#current-items"],
                         update: function(event, ui){
-                          console.log("backlog")
+                          // console.log("backlog")
                           ui.item.trigger('dropbacklog', ui.item.index());
                         }
                       });

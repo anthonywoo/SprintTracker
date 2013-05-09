@@ -114,9 +114,6 @@ TA.Views.StoryView = Backbone.View.extend({
 
   deleteStory: function(){
     var currentStory = TA.Stores.CurrentStory.get("current");
-    // TA.Stores.CompletedStories.remove(currentStory);
-    // TA.Stores.StartedStories.remove(currentStory);
-    // TA.Stores.BacklogStories.remove(currentStory);
     TA.Stores.CurrentStory.set("current", null);
     currentStory.destroy();
   }

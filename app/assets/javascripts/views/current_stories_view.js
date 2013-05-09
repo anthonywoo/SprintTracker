@@ -7,7 +7,6 @@ TA.Views.CurrentStoriesView = Backbone.View.extend({
     this.$el.sortable({
                         connectWith: ["#completed-items", "#backlog-items"],
                         update: function(event, ui){
-                          console.log("QQQQQQ")
                           ui.item.trigger('dropcurrent', ui.item.index());
                         }
                       });
