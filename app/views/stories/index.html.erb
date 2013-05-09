@@ -23,12 +23,14 @@
 </div>
 
 <script>
+  var stories = <%= @stories.html_safe %>
+  TA.setupData(stories);
+  
   $(function(){
     var $complete = $("#complete");
     var $current = $("#current");
     var $backlog = $("#backlog");
     var $view = $("#view-story");
-    var stories = <%= @stories.to_json(:include => [:story_type, :tags]).html_safe %>
-    TA.initialize($complete, $current, $backlog, stories);
+    TA.initialize($complete, $current, $backlog);
   });
 </script>

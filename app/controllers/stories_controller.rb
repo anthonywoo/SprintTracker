@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   respond_to :html, only: [:index]
 
   def index
-    @stories = Story.includes([:story_type, :tags]).order(:position).all
+    @stories = Story.includes([:story_type, :tags]).order(:position).all.to_json(:include => [:story_type, :tags])
     respond_to do |format|
       format.html { render :index }
       format.json { render :json => @stories }

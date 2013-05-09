@@ -20,11 +20,13 @@ class Story < ActiveRecord::Base
   # end
 
   def tag_names=(tags)
-    tags = tags.uniq
-    tags.map! do |tag|
-      Tag.find_or_create_by_name(tag)
+    if tags
+      tags = tags.uniq
+      tags.map! do |tag|
+        Tag.find_or_create_by_name(tag)
+      end
+      self.tags = tags
     end
-    self.tags = tags
   end
 
   protected
