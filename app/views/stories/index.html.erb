@@ -1,14 +1,14 @@
 <div class="panel-title">
-  Complete
+  <h5>Complete</h5>
 </div>
 <div class="panel-title">
-  Current
+  <h5>Current</h5>
 </div>
 <div class="panel-title">
-  Backlog
+  <h5>Backlog</h5>
 </div>
 <div class="panel-title">
-  Action
+  <h5>Action</h5>
 </div>
 
 <div id="complete" class="story-panel">
@@ -25,9 +25,9 @@
 <script>
   $(function(){
     var $complete = $("#complete");
-    $current = $("#current");
-    $backlog = $("#backlog");
-    $view = $("#view-story");
+    var $current = $("#current");
+    var $backlog = $("#backlog");
+    var $view = $("#view-story");
     var stories = <%= @stories.to_json(:include => [:story_type, :tags]).html_safe %>;
     TA.initialize($complete, $current, $backlog, stories);
   });
