@@ -1,8 +1,17 @@
+// TA.Views.BoardView = Backbone.View.extend({
+//   initialize:
+// });
+
+// TA.Views.BacklogView = TA.Views.BoardView.extend({
+//   initialize
+// })
+
 TA.Views.BacklogStoriesView = Backbone.View.extend({
   initialize: function(){
     TA.Stores.BacklogStories.on("add", this.render.bind(this));
     TA.Stores.BacklogStories.on("change", this.render.bind(this));
     TA.Stores.BacklogStories.on("remove", this.render.bind(this));
+
     this.$el.sortable({
                         connectWith: ["#completed-items", "#current-items"],
                         update: function(event, ui){
@@ -26,16 +35,29 @@ TA.Views.BacklogStoriesView = Backbone.View.extend({
       totalPoints: this.getTotalPoints()
     });
     this.$el.html(backlogView);
-    return this
+    return this;
   },
 
   startStory: function(event){
-    var selectedStory = this.collection.get($(event.target).attr("data-id"));
-    selectedStory.set("position", TA.Stores.StartedStories.length * 2)
-    selectedStory.set("story_status_id", 2)
-    TA.Stores.BacklogStories.remove(selectedStory)
-    TA.Stores.StartedStories.add(selectedStory)
-    selectedStory.save()
+    var id = $(event.target).attr("data-id");
+    var selectedStory = this.collection.get(id);
+
+    // Backbone.trigger('story:move:started', selectedStory)
+    // Backbone.trigger('story:move:backlog', selectedStory)
+
+    // collection
+    //   initialize
+    //     this.listenTo(Backbone, 'story:move:started', this.moveStory)
+
+    //   moveStory:
+    //     set thi
+    //     asdfsdfsdf
+
+    selectedStory.set("position", TA.Stores.StartedStories.length * 2);
+    selectedStory.set("story_status_id", 2);
+    TA.Stores.BacklogStories.remove(selectedStory);
+    TA.Stores.StartedStories.add(selectedStory);
+    selectedStory.save();
   },
 
   setCurrentStoryView: function(event){

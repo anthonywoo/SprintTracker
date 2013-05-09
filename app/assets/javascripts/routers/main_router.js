@@ -5,9 +5,13 @@ TA.Routers.MainRouter = Backbone.Router.extend({
     "chart": "chart"
   },
 
+  intialize: function () {
+    // this.currentView = null;
+  },
+
   main: function(){
     this.showAll();
-    $("#chart-view").html("")
+    $("#chart-view").html("");
     var completedView = new TA.Views.CompletedStoriesView({
       collection: TA.Stores.CompletedStories
     });
@@ -20,7 +24,7 @@ TA.Routers.MainRouter = Backbone.Router.extend({
 
     var currentView = new TA.Views.CurrentStoriesView({
       collection: TA.Stores.StartedStories
-    })
+    });
     $("#current").html(currentView.render().$el);
 
     var currentStoryView = new TA.Views.StoryView({
@@ -48,12 +52,11 @@ TA.Routers.MainRouter = Backbone.Router.extend({
     this.hideAll();
     var chartView = new TA.Views.ChartView();
     chartView.getChartData();
-    chartView.render();
     $("#chart-view").html(chartView.render().$el);
   },
 
   redirectToMain: function(){
-    Backbone.history.navigate("#/main");
+    Backbone.history.navigate("main", true);
   }
 
 })

@@ -1,7 +1,7 @@
 class StoriesController < ApplicationController
 
   respond_to :json
-  respond_to :html, only: [:index, :create]
+  respond_to :html, only: [:index]
 
   def index
     @stories = Story.includes([:story_type, :tags]).order(:position).all

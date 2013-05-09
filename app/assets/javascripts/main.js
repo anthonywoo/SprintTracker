@@ -13,6 +13,23 @@ window.TA = {
 
     TA.Stores.AllStories = allStories
     TA.Stores.CurrentStory = new TA.Models.Story();
+
+    // TA.Stores.AppController = {
+    //   setCurrentStory: function(story) {
+
+    //   }
+    // }
+
+    // _.extend(TA.Stores.AppController, Backbone.events)
+
+    // AppController.trigger('asdfsdf')
+
+    // TA.setCurrentStory(story)
+
+      // Backbone.trigger('currentStory:change')
+      // .listenTo(Backbone, 'currentStory:change', callback)
+        
+
     TA.Stores.CompletedStories = new TA.Collections.Stories(completedStories);
     TA.Stores.StartedStories = new TA.Collections.Stories(startedStories);
     TA.Stores.BacklogStories = new TA.Collections.Stories(backlogStories);

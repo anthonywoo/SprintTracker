@@ -11,6 +11,13 @@ class Story < ActiveRecord::Base
   validates :title, :description, :presence => true
 
   def set_tags(tags)
+    # # Find or create tags
+    # tags.map! do |tag|
+    #   Tag.find_or_create_by_name(tag)
+    # end
+
+    # self.tags = tags
+
     availableTags = Tag.where({:name => tags})
     all_tags = availableTags
     to_be_created_tags = tags.uniq - availableTags.map(&:name)
