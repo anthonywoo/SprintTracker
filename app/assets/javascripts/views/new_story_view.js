@@ -9,13 +9,7 @@ TA.Views.NewStoryView = Backbone.View.extend({
     var newView = JST["stories/new"]();
     this.$el.html(newView)
     return this
-  },
-
-  addTag: function(event){
-    event.preventDefault
-    console.log(event)
   }
-
   // storySubmit: function(event){ #MOVED TO STORYVIEW
   //   event.preventDefault();
   //   this.makeParams();

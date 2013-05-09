@@ -28,7 +28,7 @@
     $current = $("#current")
     $backlog = $("#backlog")
     $view = $("#view-story")
-    var stories = <%= @stories.to_json.html_safe %>
+    var stories = <%= @stories.to_json(:include => [:story_type, :tags]).html_safe %>
     TA.initialize($complete, $current, $backlog, stories);
   });
 </script>

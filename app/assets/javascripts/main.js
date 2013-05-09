@@ -16,7 +16,6 @@ window.TA = {
     TA.Stores.CompletedStories = new TA.Collections.Stories(completedStories);
     TA.Stores.StartedStories = new TA.Collections.Stories(startedStories);
     TA.Stores.BacklogStories = new TA.Collections.Stories(backlogStories);
-
     new TA.Routers.MainRouter($complete, $current, $backlog);
     Backbone.history.start();
   }

@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   respond_to :html, only: [:index, :create]
 
   def index
-    @stories = Story.order(:position).all
+    @stories = Story.includes([:story_type, :tags]).order(:position).all
     respond_to do |format|
       format.html { render :index }
       format.json { render :json => @stories }
@@ -13,6 +13,7 @@ class StoriesController < ApplicationController
 
   def create
     story = Story.new(params[:story])
+    story.set_tags(params[:tags]) unless params[:tags].empty?
     if story.save
       render :json => story
     else
@@ -32,6 +33,7 @@ class StoriesController < ApplicationController
   def destroy
     story = Story.find(params[:id])
     if story.destroy
+      render :json => {status: "ok"}
     else
       render :json => story.errors, status: 422
     end

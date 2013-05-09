@@ -10,7 +10,7 @@ TA.Views.StoryView = Backbone.View.extend({
     "submit #story-update-form": "storyUpdate",
     "click #cancel": "cancelStory",
     "click #delete": "deleteStory",
-    // "keypress #tag-input": "addTag",
+    "keypress #tag-input": "addTag", 
     "keyup #story-search": "searchStories",
     "click .search-result": "viewSearchResult"
   },
@@ -37,6 +37,8 @@ TA.Views.StoryView = Backbone.View.extend({
     this.makeParams();
     var newStory = new TA.Models.Story(this.makeParams());
     if (newStory.isValid()){
+
+      //check tag store to see if tags exist - if not, create them. 
       newStory.save();
       TA.Stores.BacklogStories.add(newStory);
       this.render();
@@ -62,7 +64,7 @@ TA.Views.StoryView = Backbone.View.extend({
   addTag: function(event){
     if (event.keyCode === 13){
       event.preventDefault();
-      var hiddenValue = '<input type="hidden" name="tag_names[]" value="' + $("#tag-input").val() + '">'
+      var hiddenValue = '<input type="hidden" name="tag_names" class="tag-input" value="' + $("#tag-input").val() + '">'
       var tagSpan = '<span class="label label-info tag-label temp-tag">'+ $("#tag-input").val() + hiddenValue + '</span>'
       $("#tag-area").append(tagSpan)
       $("#tag-input").val("")
@@ -97,6 +99,11 @@ TA.Views.StoryView = Backbone.View.extend({
     $(".story-input").each(function(i, el){
       params[$(el).attr("name")] = $(el).val()
     })
+    var tags = []
+    $(".tag-input").each(function(i, el){
+      tags.push({name: $(el).val()})
+    })
+    params["tags"] = tags
     return params
   },
 
@@ -107,9 +114,9 @@ TA.Views.StoryView = Backbone.View.extend({
 
   deleteStory: function(){
     var currentStory = TA.Stores.CurrentStory.get("current");
-    TA.Stores.CompletedStories.remove(currentStory);
-    TA.Stores.StartedStories.remove(currentStory);
-    TA.Stores.BacklogStories.remove(currentStory);
+    // TA.Stores.CompletedStories.remove(currentStory);
+    // TA.Stores.StartedStories.remove(currentStory);
+    // TA.Stores.BacklogStories.remove(currentStory);
     TA.Stores.CurrentStory.set("current", null);
     currentStory.destroy();
   }

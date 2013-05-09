@@ -17,6 +17,7 @@
 //= require backbone
 //= require backbone-relational
 //= require main
+//= require ./models/tag
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./routers

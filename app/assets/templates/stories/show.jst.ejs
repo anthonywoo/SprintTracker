@@ -11,7 +11,12 @@
         <option value="3" <% if(story.escape("story_type_id")==="3"){ %> selected <%}%> >Chore</option>
       </select>
     Points:
-      <input type="number" name="points" class="story-input" value='<%= story.escape("points")%>'>
+      <input type="number" name="points" class="story-input" value='<%= story.escape("points")%>'> <br>
+    Tags: 
+      <% story.get("tags").each(function(tag){ %>
+        <span class='label label-info tag-label'><%= tag.escape("name") %></span>
+      <% }) %>
+      <br>
       <input type="submit" value="Update" id="story-submit">
   </form>
   <input type="button" value="Cancel" id="cancel">
