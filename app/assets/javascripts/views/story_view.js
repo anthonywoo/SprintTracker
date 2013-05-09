@@ -103,7 +103,7 @@ TA.Views.StoryView = Backbone.View.extend({
     $(".tag-input").each(function(i, el){
       tags.push({name: $(el).val()})
     })
-    params["tags"] = tags
+    params["tag_names"] = tags
     return params
   },
 

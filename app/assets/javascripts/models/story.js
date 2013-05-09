@@ -3,7 +3,9 @@ TA.Models.Story = Backbone.RelationalModel.extend({
   
   relations: [{
     type: Backbone.HasMany,
-    key: 'tags',
+    key: 'tag_names',
+    keySource: "tags",
+    keyDestination: 'tag_names',
     relatedModel: TA.Models.Tag,
     collectionType: TA.Collections.Tags,
     includeInJSON: 'name'

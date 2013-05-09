@@ -1,30 +1,30 @@
 class Story < ActiveRecord::Base
   belongs_to :story_type
   belongs_to :story_status
-  attr_accessible :description, :title, :points, :story_type_id, :story_status_id, :position, :completion_date
+  attr_accessible :description, :title, :points, :story_type_id, :story_status_id, :position, :completion_date, :tag_names
 
   before_save :set_position
 
   has_many :taggings
   has_many :tags, :through => :taggings
 
-  validates :title, :description, :presence => true
+  validates :title, :story_type_id, :story_status_id, :presence => true
 
-  def set_tags(tags)
-    # # Find or create tags
-    # tags.map! do |tag|
-    #   Tag.find_or_create_by_name(tag)
-    # end
+  # def set_tags(tags)
+  #   tags = tags.uniq
+  #   tags.map! do |tag|
+  #     Tag.find_or_create_by_name(tag)
+  #   end
+  #   binding.pry
+  #   self.tags = tags
+  # end
 
-    # self.tags = tags
-
-    availableTags = Tag.where({:name => tags})
-    all_tags = availableTags
-    to_be_created_tags = tags.uniq - availableTags.map(&:name)
-    to_be_created_tags.each do |tag_name|
-      all_tags << Tag.create(name: tag_name)
+  def tag_names=(tags)
+    tags = tags.uniq
+    tags.map! do |tag|
+      Tag.find_or_create_by_name(tag)
     end
-    self.tags = all_tags
+    self.tags = tags
   end
 
   protected

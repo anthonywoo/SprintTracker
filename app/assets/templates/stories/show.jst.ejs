@@ -13,7 +13,7 @@
     Points:
       <input type="number" name="points" class="story-input" value='<%= story.escape("points")%>'> <br>
     Tags: 
-      <% story.get("tags").each(function(tag){ %>
+      <% story.get("tag_names").each(function(tag){ %>
         <span class='label label-info tag-label'><%= tag.escape("name") %></span>
       <% }) %>
       <br>

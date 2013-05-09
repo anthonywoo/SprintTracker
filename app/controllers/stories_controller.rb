@@ -13,7 +13,6 @@ class StoriesController < ApplicationController
 
   def create
     story = Story.new(params[:story])
-    story.set_tags(params[:tags]) if params[:tags]
     if story.save
       render :json => story
     else
